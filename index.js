@@ -46,6 +46,14 @@ async function run() {
             const result = await servicesCollection.insertOne(service);
             console.log(result);
             res.json(result);
+        });
+
+        // DELETE API
+        app.delete('/services/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = { _id:ObjectId(id) };
+            const service = await servicesCollection.deleteOne(query);
+            res.json(service);
         })
     }
     finally{
