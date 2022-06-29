@@ -1,9 +1,14 @@
 const express = require('express');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 5000;
+
+// middleware
+app.use(cors());
+app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pabg0.mongodb.net/?retryWrites=true&w=majority`;
 // console.log(uri);
@@ -18,15 +23,12 @@ async function run() {
 
         // POST API
         app.post('/services', async(req, res) => {
-            const service = {
-                "name":"ENGINE DIAGNOSTIC",
-                "price":300,
-                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa vel suscipit pariatur laboriosam incidunt omnis inventore similique in ut iusto.",
-                "img":"https://i.ibb.co/zZYSzYs/service1.jpg"
-            }
-
+            const service = req.body;
+            console.log('hitted', service);
+            // res.send('post hitted');
             const result = await servicesCollection.insertOne(service);
             console.log(result);
+            res.json(result);
         })
     }
     finally{
