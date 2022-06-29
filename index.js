@@ -13,7 +13,21 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try{
         await client.connect();
-        console.log('connected to database');
+        const database = client.db('carMechanics');
+        const servicesCollection = database.collection('services');
+
+        // POST API
+        app.post('/services', async(req, res) => {
+            const service = {
+                "name":"ENGINE DIAGNOSTIC",
+                "price":300,
+                "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa vel suscipit pariatur laboriosam incidunt omnis inventore similique in ut iusto.",
+                "img":"https://i.ibb.co/zZYSzYs/service1.jpg"
+            }
+
+            const result = await servicesCollection.insertOne(service);
+            console.log(result);
+        })
     }
     finally{
         // await client.close();
