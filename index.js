@@ -69,3 +69,28 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log("Running on port ", port);
 })
+
+/*
+
+Steps of deploy server in the heroku (can also check the  heroku docs) ->
+
+One Time:
+1. open heroku account
+2. install heroku software
+
+Every Project:
+1. git init
+2. .gitignore (node_modules, .env)
+3. push everything to git
+4. make sure you have this script in package.json file: "start": "node index.js"
+5. make sure process.env.PORT is added in the port number option in index.js file
+6. heroku login
+7. create heroku (onlu one time for a project)
+8. command: git push heroku main
+
+Update the Project:
+1. save everything and check locally
+2. git add, commit and push first
+3. git push heroku main 
+
+*/
