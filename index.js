@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
     res.send('Runnig Genius Server');
 });
 
-app.hello('/hello', (req, res) => {
+app.get('/hello', (req, res) => {
     res.send('Updated here!!');
 })
 
